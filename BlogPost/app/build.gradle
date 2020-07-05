@@ -14,7 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.bsrakdg.blogpost.MockTestRunner"
         // clear state after each individual test
         testInstrumentationRunnerArguments clearPackageData: 'true'
     }
@@ -35,10 +35,6 @@ android {
         kotlinOptions {
             jvmTarget = "1.8"
         }
-    }
-
-    testOptions {
-        execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }
 
 }
@@ -124,4 +120,5 @@ dependencies {
     // material dialogs
     def matieral_dialogs_version = "3.1.0"
     implementation "com.afollestad.material-dialogs:core:$matieral_dialogs_version"
+
 }
