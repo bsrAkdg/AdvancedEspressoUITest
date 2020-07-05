@@ -2,6 +2,7 @@ package com.bsrakdg.blogpost.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bsrakdg.blogpost.repository.FakeMainRepositoryImpl
 import com.bsrakdg.blogpost.repository.MainRepositoryImpl
 import com.bsrakdg.blogpost.ui.viewmodel.MainViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -16,7 +17,7 @@ import javax.inject.Singleton
 class FakeMainViewModelFactory
 @Inject
 constructor(
-    private val mainRepository: MainRepositoryImpl
+    private val mainRepository: FakeMainRepositoryImpl
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
