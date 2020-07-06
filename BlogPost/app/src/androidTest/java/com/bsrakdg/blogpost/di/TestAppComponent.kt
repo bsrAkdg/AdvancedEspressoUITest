@@ -3,6 +3,7 @@ package com.bsrakdg.blogpost.di
 import android.app.Application
 import com.bsrakdg.blogpost.api.FakeApiService
 import com.bsrakdg.blogpost.repository.FakeMainRepositoryImpl
+import com.bsrakdg.blogpost.ui.DetailFragmentTest
 import dagger.BindsInstance
 import dagger.Component
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -19,6 +20,7 @@ import javax.inject.Singleton
 ])
 interface TestAppComponent : AppComponent{
 
+    // each fragment test class access this fields
     val apiService: FakeApiService
 
     val mainRepository: FakeMainRepositoryImpl
@@ -32,4 +34,5 @@ interface TestAppComponent : AppComponent{
         fun build(): TestAppComponent
     }
 
+    fun inject(detailFragmentTest: DetailFragmentTest)
 }

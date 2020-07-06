@@ -14,7 +14,8 @@ import com.bsrakdg.blogpost.models.BlogPost
 import com.bsrakdg.blogpost.ui.viewmodel.MainViewModel
 import com.bsrakdg.blogpost.util.GlideManager
 import kotlinx.android.synthetic.main.fragment_detail.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.InternalCoroutinesApi
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,9 +29,9 @@ constructor(
     private val requestManager: GlideManager
 ) : Fragment(R.layout.fragment_detail) {
 
-    private val CLASS_NAME = "DetailFragment"
+    private val className = "DetailFragment"
 
-    lateinit var uiCommunicationListener: UICommunicationListener
+    private lateinit var uiCommunicationListener: UICommunicationListener
 
     val viewModel: MainViewModel by activityViewModels {
         viewModelFactory
@@ -77,17 +78,17 @@ constructor(
         setUICommunicationListener(null)
     }
 
-    fun setUICommunicationListener(mockUICommuncationListener: UICommunicationListener?){
+    fun setUICommunicationListener(mockUICommunicationListener: UICommunicationListener?) {
 
         // TEST: Set interface from mock
-        if(mockUICommuncationListener != null){
-            this.uiCommunicationListener = mockUICommuncationListener
+        if (mockUICommunicationListener != null) {
+            this.uiCommunicationListener = mockUICommunicationListener
         }
         else{ // PRODUCTION: if no mock, get from context
             try {
                 uiCommunicationListener = (context as UICommunicationListener)
             }catch (e: Exception){
-                Log.e(CLASS_NAME, "$context must implement UICommunicationListener")
+                Log.e(className, "$context must implement UICommunicationListener")
             }
         }
     }
