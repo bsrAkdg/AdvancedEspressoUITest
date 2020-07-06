@@ -5,6 +5,7 @@ import com.bsrakdg.blogpost.models.BlogPost
 import com.bsrakdg.blogpost.models.Category
 import com.bsrakdg.blogpost.util.ErrorStack
 import com.bsrakdg.blogpost.util.ErrorState
+import com.bsrakdg.blogpost.util.EspressoIdlingResource
 import com.bsrakdg.blogpost.util.printLogD
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -47,6 +48,7 @@ fun MainViewModel.addJobToCounter(stateEventName: String){
     val update = getCurrentViewStateOrNew()
     update.activeJobCounter.add(stateEventName)
     setViewState(update)
+    EspressoIdlingResource.increment() // for android test
 }
 
 @ExperimentalCoroutinesApi
@@ -55,6 +57,7 @@ fun MainViewModel.removeJobFromCounter(stateEventName: String){
     val update = getCurrentViewStateOrNew()
     update.activeJobCounter.remove(stateEventName)
     setViewState(update)
+    EspressoIdlingResource.decrement() // for android test
 }
 
 @ExperimentalCoroutinesApi
