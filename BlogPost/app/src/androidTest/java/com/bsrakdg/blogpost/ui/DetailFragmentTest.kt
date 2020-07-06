@@ -9,11 +9,9 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
 import com.bsrakdg.blogpost.R
 import com.bsrakdg.blogpost.TestBaseApplication
-import com.bsrakdg.blogpost.api.FakeApiService
 import com.bsrakdg.blogpost.di.TestAppComponent
 import com.bsrakdg.blogpost.fragments.FakeMainFragmentFactory
 import com.bsrakdg.blogpost.models.BlogPost
-import com.bsrakdg.blogpost.repository.FakeMainRepositoryImpl
 import com.bsrakdg.blogpost.ui.viewmodel.setSelectedBlogPost
 import com.bsrakdg.blogpost.util.Constants.BLOG_POSTS_DATA_FILENAME
 import com.bsrakdg.blogpost.util.Constants.CATEGORIES_DATA_FILENAME
@@ -36,7 +34,7 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @InternalCoroutinesApi
 @RunWith(AndroidJUnit4ClassRunner::class)
-class DetailFragmentTest {
+class DetailFragmentTest : BaseMainActivityTest() {
 
     @Inject
     lateinit var viewModelFactory: FakeMainViewModelFactory
@@ -110,29 +108,7 @@ class DetailFragmentTest {
 
     }
 
-    private fun injectTest(application: TestBaseApplication) {
+    override fun injectTest(application: TestBaseApplication) {
         (application.appComponent as TestAppComponent).inject(this)
-    }
-
-    private fun configureFakeApiService(
-        blogDataSource: String? = null, // file name
-        categoriesDataSource: String? = null,
-        networkDelay: Long? = null,
-        application: TestBaseApplication
-    ): FakeApiService {
-        val apiService = (application.appComponent as TestAppComponent).apiService
-        blogDataSource?.let { apiService.blogPostJsonFileName = it }
-        categoriesDataSource?.let { apiService.categoriesJsonFileName = it }
-        networkDelay?.let { apiService.networkDelay = it }
-        return apiService
-    }
-
-    private fun configureFakeRepository(
-        apiService: FakeApiService,
-        application: TestBaseApplication
-    ): FakeMainRepositoryImpl {
-        val mainRepository = (application.appComponent as TestAppComponent).mainRepository
-        mainRepository.apiService = apiService
-        return mainRepository
     }
 }
