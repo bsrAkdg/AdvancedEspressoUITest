@@ -81,7 +81,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit-ktx:$androidx_test_ext"
 
     // androidx.fragment
-    def fragment_version = "1.2.0"
+    def fragment_version = "1.2.5"
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
@@ -96,7 +96,7 @@ dependencies {
     kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
 
     // jetpack navigation components
-    def nav_version = "2.3.0-alpha02"
+    def nav_version = "2.3.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-runtime:$nav_version"
@@ -109,16 +109,16 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
 
     //glide
-    def glide_version = "4.9.0"
+    def glide_version = "4.11.0"
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     // Recyclerview
-    def recyclerview_version = "1.1.0-beta03"
+    def recyclerview_version = "1.2.0-alpha04"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
     // material dialogs
-    def matieral_dialogs_version = "3.1.0"
+    def matieral_dialogs_version = "3.1.1"
     implementation "com.afollestad.material-dialogs:core:$matieral_dialogs_version"
 
 }
