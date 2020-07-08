@@ -123,7 +123,7 @@ class ListFragmentIntegrationTests : BaseMainActivityTest() {
 
         val apiService = configureFakeApiService(
             blogDataSource = Constants.BLOG_POSTS_DATA_FILENAME,
-            categoriesDataSource = Constants.CATEGORIES_DATA_FILENAME, // empty list of data
+            categoriesDataSource = Constants.CATEGORIES_DATA_FILENAME,
             networkDelay = 0L,
             application = app
         )
@@ -172,7 +172,7 @@ class ListFragmentIntegrationTests : BaseMainActivityTest() {
 
         val apiService = configureFakeApiService(
             blogDataSource = Constants.BLOG_POSTS_DATA_FILENAME,
-            categoriesDataSource = Constants.CATEGORIES_DATA_FILENAME, // empty list of data
+            categoriesDataSource = Constants.CATEGORIES_DATA_FILENAME,
             networkDelay = 0L,
             application = app
         )
@@ -218,6 +218,46 @@ class ListFragmentIntegrationTests : BaseMainActivityTest() {
 
         onView(withText("Lounging Dogs")).check(doesNotExist())
 
+    }
+
+
+    @Test
+    fun isInstanceStateSavedAndRestored_onActivityDestroyed() {
+        // setup
+        val app = InstrumentationRegistry
+            .getInstrumentation()
+            .targetContext.applicationContext as TestBaseApplication
+
+
+        val apiService = configureFakeApiService(
+            blogDataSource = Constants.BLOG_POSTS_DATA_FILENAME,
+            categoriesDataSource = Constants.CATEGORIES_DATA_FILENAME,
+            networkDelay = 0L,
+            application = app
+        )
+
+        configureFakeRepository(
+            apiService = apiService,
+            application = app
+        )
+
+        injectTest(app)
+
+        val scenario = launchActivity<MainActivity>()
+
+        // run test
+        onView(withId(R.id.recycler_view)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.recycler_view)).perform(
+            RecyclerViewActions.scrollToPosition<BlogPostViewHolder>(8)
+        )
+        onView(withText("Blake Posing for his Website")).check(matches(isDisplayed()))
+
+        // configuration change : rotation
+        scenario.recreate()
+
+        // check scrolling position is the same
+        onView(withText("Blake Posing for his Website")).check(matches(isDisplayed()))
     }
 
     override fun injectTest(application: TestBaseApplication) {
