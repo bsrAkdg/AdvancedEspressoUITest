@@ -202,8 +202,20 @@ class ListFragmentIntegrationTests : BaseMainActivityTest() {
         val categoryName = "earthporn"
         onView(withText(categoryName)).perform(click())
 
+        val recyclerView = onView(withId(R.id.recycler_view))
+        recyclerView.check(matches(isDisplayed()))
+
+
+        recyclerView.perform(
+            RecyclerViewActions.scrollToPosition<BlogPostViewHolder>(0)
+        )
         onView(withText("Mountains in Washington")).check(matches(isDisplayed()))
+
+        recyclerView.perform(
+            RecyclerViewActions.scrollToPosition<BlogPostViewHolder>(1)
+        )
         onView(withText("France Mountain Range")).check(matches(isDisplayed()))
+
         onView(withText("Lounging Dogs")).check(doesNotExist())
 
     }
