@@ -4,6 +4,7 @@ import android.app.Application
 import com.bsrakdg.blogpost.api.FakeApiService
 import com.bsrakdg.blogpost.repository.FakeMainRepositoryImpl
 import com.bsrakdg.blogpost.ui.DetailFragmentTest
+import com.bsrakdg.blogpost.ui.ListFragmentErrorTests
 import com.bsrakdg.blogpost.ui.ListFragmentIntegrationTests
 import dagger.BindsInstance
 import dagger.Component
@@ -38,4 +39,6 @@ interface TestAppComponent : AppComponent{
     fun inject(detailFragmentTest: DetailFragmentTest)
 
     fun inject(listFragmentIntegrationTests: ListFragmentIntegrationTests)
+
+    fun inject(listFragmentErrorTests: ListFragmentErrorTests)
 }
